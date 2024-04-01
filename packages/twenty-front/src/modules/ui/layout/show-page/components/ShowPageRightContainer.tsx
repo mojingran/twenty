@@ -11,6 +11,7 @@ import { Timeline } from '@/activities/timeline/components/Timeline';
 import { TimelineQueryEffect } from '@/activities/timeline/components/TimelineQueryEffect';
 import { ActivityTargetableObject } from '@/activities/types/ActivityTargetableEntity';
 import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSingular';
+import { Inventories } from '@/activities/inventories/Inventories'
 import {
   IconCalendarEvent,
   IconCheckbox,
@@ -23,7 +24,6 @@ import { TabList } from '@/ui/layout/tab/components/TabList';
 import { useTabList } from '@/ui/layout/tab/hooks/useTabList';
 import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 import { useIsFeatureEnabled } from '@/workspace/hooks/useIsFeatureEnabled';
-
 const StyledShowPageRightContainer = styled.div`
   display: flex;
   flex: 1 0 0;
@@ -118,8 +118,13 @@ export const ShowPageRightContainer = ({
       hide: !shouldDisplayLogTab,
       hasBetaPill: true,
     },
+    {
+      id: 'inventories',
+      title: 'Inventories',
+      Icon: IconNotes,
+    }
   ];
-
+  console.log(activeTabId);
   return (
     <StyledShowPageRightContainer>
       <StyledTabListContainer>
@@ -145,6 +150,7 @@ export const ShowPageRightContainer = ({
         <Calendar targetableObject={targetableObject} />
       )}
       {activeTabId === 'logs' && <Events targetableObject={targetableObject} />}
+      {activeTabId === 'inventories' && <Inventories />}
     </StyledShowPageRightContainer>
   );
 };
